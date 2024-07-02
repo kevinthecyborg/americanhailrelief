@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> partials/head
+      title="Thank You! | American Hail Relief"
+      description="Join millions of Americans who have repaired their vehicles for free with American Hail Relief. Check your zip code now to see if you qualify!"
+    }}
+  </head>
+  <body class="bg-light">
+
+    <!-- NAVBAR -->
+    {{> partials/navbar classList="bg-white border-bottom" container="container" button="primary"}}
+
+    <!-- THANK YOU -->
+    <section class="pt-6 pt-md-8 pb-4 pb-md-6" data-aos="fade-up">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12 col-md-6 text-center">
+
+            <!-- Image -->
+            <img src="assets/img/thank-you.svg" class="img-fluid mw-75 mb-6" alt="..." data-aos="fade-up" data-aos-delay="100">
+
+            <!-- Heading -->
+            <h1 class="display-2 fw-bold">
+              Thank you!
+            </h1>
+
+            <!-- Text -->
+            <p class="fs-lg text-body-secondary mb-6">
+              Your information has been updated. One of our verified partners will be in touch soon to start the process of your hail repair!
+            </p>
+
+            <!-- Button -->
+            <script>
+              function close_window() {
+                if (confirm("Close Window?")) {
+                  close();
+                }
+              }
+            </script>
+            <a href="javascript:close_window();" class="btn btn-primary-subtle lift mb-6">Close Window</a>
+
+          </div>
+        </div> <!-- / .row -->
+      </div> <!-- / .container -->
+    </section>
+
+    <!-- SHAPE -->
+    <div class="position-relative">
+      <div class="shape shape-bottom shape-fluid-x text-white">
+        {{> curves/curve-1}}
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    {{> partials/footer classList="bg-white"}}
+
+    <!-- JAVASCRIPT -->
+    {{> partials/scripts}}
+
+  </body>
+</html>
