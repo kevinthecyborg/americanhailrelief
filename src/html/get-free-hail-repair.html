@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> partials/head
+      title="Get Free Automotive Hail Repair | American Hail Relief"
+      description="Join millions of Americans who have repaired their vehicles for free with American Hail Relief. Check your zip code now to see if you qualify!"
+    }}
+  </head>
+  <body class="bg-light">
+
+    <!-- NAVBAR -->
+    {{> partials/navbar classList="bg-white border-bottom" container="container" button="primary"}}
+
+    <!-- Zip Code Submit -->
+    <section class="pt-6 pt-md-8 pb-4 pb-md-6" data-aos="fade-up">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12 col-md-6 text-center">
+
+            <!-- Image -->
+            <img src="assets/img/car-hail-damage.svg" class="img-fluid mw-75 mb-6" alt="..." data-aos="fade-up" data-aos-delay="100">
+
+            <!-- Heading -->
+            <h1 class="display-2 fw-bold">
+              Does your vehicle
+              <br>have <span class="text-primary underline">hail damage</span>?
+            </h1>
+
+            <!-- Text -->
+            <p class="fs-lg text-body-secondary mb-6">
+              Enter your zip code below to see if you qualify for <span class="text-primary">FREE automotive hail damage repair</span> through the American Hail Relief program.
+            </p>
+
+            <!-- Form -->
+             <!-- Validate form + zip code & append zip code to URL of destination page -->
+            <script>
+              function submitWithZip(event) {
+                var zipCode = document.getElementById("zipCodeInput").value;
+                var form = document.getElementById("zipcodeSubmitForm");
+
+                // Check validity including pattern matching
+                if (!event.target.checkValidity() || !zipCode.match(/^[0-9]{5}$/)) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  // Trigger validation manually
+                  form.classList.add('was-validated');
+                  return;
+                }
+
+                form.action = "https://form.americanhailrelief.com?zipcode=" + zipCode;
+                form.submit();
+              }
+            </script>
+            <form id="zipcodeSubmitForm" class="mb-6 mb-md-8 mb-md-0 order-md-1 needs-validation" novalidate>
+              <div class="row gx-4">
+                <div class="col">
+
+                  <!-- Input -->
+                  <input type="text" name="zipcode" id="zipCodeInput" pattern="[0-9]{5}" class="form-control" placeholder="Enter your zip code" required>
+
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+
+                  <div class="invalid-feedback">
+                    Please provide a valid zip code.
+                  </div>
+
+                </div>
+                <div class="col-auto">
+
+                  <!-- Submit -->
+                  <button type="submit" onclick="submitWithZip(event)" class="btn btn-primary">
+                    Check Eligibility
+                  </button>
+
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div> <!-- / .row -->
+      </div> <!-- / .container -->
+    </section>
+
+    <!-- SHAPE -->
+    <div class="position-relative">
+      <div class="shape shape-bottom shape-fluid-x text-white">
+        {{> curves/curve-1}}
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    {{> partials/footer classList="bg-white"}}
+
+    <!-- JAVASCRIPT -->
+    {{> partials/scripts}}
+
+  </body>
+</html>
