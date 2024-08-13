@@ -19,6 +19,18 @@
   border-bottom: 3px solid rgba(91, 168, 227, 0.2);
 }
 
+.text-success.underline {
+  border-bottom: 3px solid rgba(66, 186, 150, 0.2);
+}
+
+.text-danger.underline {
+  border-bottom: 3px solid rgba(223, 71, 89, 0.2);
+}
+
+.badge span {
+  font-weight: 800;
+}
+
 #content1, #content2 {
   transition: opacity 0.5s ease;
 }
