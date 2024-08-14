@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {{> partials/head
+    {{> partials/head-lead
       title="Thank You! | American Hail Relief"
       description="Join millions of Americans who have repaired their vehicles for free with American Hail Relief. Check your zip code now to see if you qualify!"
     }}
@@ -11,8 +11,13 @@
     <!-- NAVBAR -->
     {{> partials/navbar classList="bg-white border-bottom" container="container" button="primary"}}
 
+
+
     <!-- THANK YOU -->
     <section class="pt-6 pt-md-8 pb-4 pb-md-6" data-aos="fade-up">
+      <!-- CONFETTI -->
+      {{> partials/confetti }}
+
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-12 col-md-6 text-center">
@@ -22,12 +27,15 @@
 
             <!-- Heading -->
             <h1 class="display-2 fw-bold">
-              Thank you!
+              Congratulations!
             </h1>
+
+            <!-- Subheading -->
+            <h2 class="text-success">You qualify for free hail repair.</h2>
 
             <!-- Text -->
             <p class="fs-lg text-body-secondary mb-6">
-              Your information has been updated. One of our verified partners will be in touch soon to start the process of your hail repair!
+              One of our verified partners will be in touch soon.
             </p>
 
             <!-- Button -->

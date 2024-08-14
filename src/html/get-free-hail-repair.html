@@ -32,56 +32,105 @@
             </p>
 
             <!-- Form -->
-             <!-- Validate form + zip code & append zip code to URL of destination page -->
-            <script>
-              function submitWithZip(event) {
-                var zipCode = document.getElementById("zipCodeInput").value;
-                var form = document.getElementById("zipcodeSubmitForm");
-
-                // Check validity including pattern matching
-                if (!event.target.checkValidity() || !zipCode.match(/^[0-9]{5}$/)) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  // Trigger validation manually
-                  form.classList.add('was-validated');
-                  return;
-                }
-
-                form.action = "https://form.americanhailrelief.com?zipcode=" + zipCode;
-                form.submit();
-              }
-            </script>
-            <form id="zipcodeSubmitForm" class="mb-6 mb-md-8 mb-md-0 order-md-1 needs-validation" novalidate>
-              <div class="row gx-4">
-                <div class="col">
-
-                  <!-- Input -->
-                  <input type="text" name="zipcode" id="zipCodeInput" pattern="[0-9]{5}" class="form-control" placeholder="Enter your zip code" required>
-
-                  <div class="valid-feedback">
-                    Looks good!
+            <div id="formContainer">
+              <form id="zipcodeSubmitForm" class="mb-6 mb-md-8 mb-md-0 order-md-1 needs-validation" novalidate>
+                <div class="row gx-4">
+                  <div class="col">
+                    <!-- Input -->
+                    <input type="text" name="zipcode" id="zipCodeInput" pattern="[0-9]{5}" class="form-control" placeholder="Enter your zip code" required>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                      Please provide a valid zip code.
+                    </div>
                   </div>
-
-                  <div class="invalid-feedback">
-                    Please provide a valid zip code.
+                  <div class="col-auto">
+                    <!-- Submit -->
+                    <button type="submit" onclick="submitWithZip(event)" id="zipCodeSubmit" class="btn btn-primary">
+                      Check Eligibility
+                    </button>
                   </div>
-
                 </div>
-                <div class="col-auto">
+              </form>
+            </div>
 
-                  <!-- Submit -->
-                  <button type="submit" onclick="submitWithZip(event)" class="btn btn-primary">
-                    Check Eligibility
-                  </button>
-
-                </div>
+            <div id="processingContainer" style="display: none;">
+              <h3 id="submissionMessage" class="mb-3">ZipCode successfully submitted</h3>
+              <div id="spinner" class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
               </div>
-            </form>
+              <p id="verifyingMessage" style="display: none;">Verifying eligibility, please wait...</p>
+            </div>
+
+            <script>
+            function submitWithZip(event) {
+              event.preventDefault();
+              var zipCode = document.getElementById("zipCodeInput").value;
+              var form = document.getElementById("zipcodeSubmitForm");
+
+              // Check validity including pattern matching
+              if (!form.checkValidity() || !zipCode.match(/^[0-9]{5}$/)) {
+                event.stopPropagation();
+                // Trigger validation manually
+                form.classList.add('was-validated');
+                return;
+              }
+
+              // Fade out the form
+              fadeOut(document.getElementById("formContainer"), function() {
+                // Fade in the processing container
+                fadeIn(document.getElementById("processingContainer"), function() {
+                  // After 1 second, show the verifying message
+                  setTimeout(function() {
+                    fadeIn(document.getElementById("verifyingMessage"), function() {
+                      // After another 1 second, redirect
+                      setTimeout(function() {
+                        window.location.href = "https://form.americanhailrelief.com?zipcode=" + zipCode;
+                      }, 2000);
+                    });
+                  }, 2000);
+                });
+              });
+
+              // Facebook pixel event
+              fbq('track', 'CompleteRegistration');
+            }
+
+            function fadeOut(element, callback) {
+              element.style.opacity = 1;
+              (function fade() {
+                if ((element.style.opacity -= .1) < 0) {
+                  element.style.display = "none";
+                  if (callback) callback();
+                } else {
+                  requestAnimationFrame(fade);
+                }
+              })();
+            }
+
+            function fadeIn(element, callback) {
+              element.style.opacity = 0;
+              element.style.display = "block";
+              (function fade() {
+                var val = parseFloat(element.style.opacity);
+                if (!((val += .1) > 1)) {
+                  element.style.opacity = val;
+                  requestAnimationFrame(fade);
+                } else if (callback) {
+                  callback();
+                }
+              })();
+            }
+            </script>
 
           </div>
         </div> <!-- / .row -->
       </div> <!-- / .container -->
     </section>
+
+    <!-- AS SEEN ON -->
+    {{> partials/as-seen-on }}
 
     <!-- SHAPE -->
     <div class="position-relative">
